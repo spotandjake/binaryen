@@ -566,7 +566,7 @@ if(EMSCRIPTEN)
   # binaryen.js JavaScript variant
   add_executable(binaryen_js ${binaryen_SOURCES})
   target_link_libraries(binaryen_js PRIVATE binaryen)
-  target_link_libraries(binaryen_js PRIVATE "-sWASM=0")
+  target_link_libraries(binaryen_js PRIVATE "-sWASM=1")
   target_link_libraries(binaryen_js PRIVATE "-sWASM_ASYNC_COMPILATION=0")
 
   if(${CMAKE_CXX_COMPILER_VERSION} STREQUAL "6.0.1")
