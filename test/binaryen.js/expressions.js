@@ -3409,3 +3409,67 @@ console.log("# I31Get");
 
   module.dispose();
 })();
+
+console.log("# CallRef");
+(function testCallRef() {
+  const module = new binaryen.Module();
+
+  const funcName = "tiny";
+  const func = module.addFunction(funcName, binaryen.createType([binaryen.i32, binaryen.i32]), binaryen.none, [], module.nop());
+  const funcType = binaryen.Function(module.getFunction(funcName)).type;
+  const funcRef = binaryen.RefFunc(module.ref.func(funcName, funcType));
+
+  const operands = [
+    module.i32.const(6),
+    module.i32.const(7)
+  ];
+  const theCallRef = module.call_ref(funcRef, operands, binaryen.none, false);
+  assert(theCallRef instanceof binaryen.CallRef);
+  assert(theCallRef instanceof binaryen.Expression);
+  assert(theCallRef.target === funcRef);
+  assertDeepEqual(theCallRef.operands, []);
+  assert(theCallRef.isReturn === false);
+  assert(theCallRef.type === binaryen.none);
+
+  var info = binaryen.getExpressionInfo(theCallRef);
+  assert(info.id === theCallRef.id);
+  assert(info.type === theCallRef.type);
+  assert(info.target === theCallRef.target);
+  assertDeepEqual(info.operands, theCallRef.operands);
+  assert(info.isReturn === theCallRef.isReturn);
+
+  assert(module.CallRef.getNumOperands(theCallRef) == operands.length);
+
+  assertDeepEqual(module.CallRef.getOperandAt(theCallRef, 0), operands[0]);
+  assertDeepEqual(module.CallRef.getOperandAt(theCallRef, 1), operands[1]);
+
+  module.CallRef.setOperandAt(theCallRef, 0, operands[1]);
+  assertDeepEqual(module.CallRef.getOperandAt(theCallRef, 0), operands[1]);
+
+  module.CallRef.appendOperand(theCallRef, operands[0]);
+  assert(module.CallRef.getNumOperands(theCallRef) == 3);
+  assertDeepEqual(module.CallRef.getOperandAt(theCallRef, 2),  operands[0]);
+
+  module.CallRef.insertOperandAt(theCallRef, 1, operands[0]);
+  assert(module.CallRef.getNumOperands(theCallRef) == 4);
+  assertDeepEqual(module.CallRef.getOperandAt(theCallRef, 1),  operands[0]);
+
+  assertDeepEqual(module.CallRef.removeOperandAt(theCallRef, 1), operands[0]);
+  assert(module.CallRef.getNumOperands(theCallRef) == 3);
+
+  assert(module.getTarget(theCallRef) === funcRef);
+
+  // TODO: CallRef.setTarget(expr, targetExpr)
+  assert(module.CallRef.isReturn(theCallRef) === false);
+  module.CallRef.setReturn(theCallRef, true);
+  assert(module.CallRef.isReturn(theCallRef) === true);
+
+  console.log(theCallRef.toText());
+  // assert(
+  //   theCall.toText()
+  //   ==
+  //   "(call $bar\n (i32.const 7)\n (i32.const 6)\n)\n"
+  // );
+
+  module.dispose();
+})();
