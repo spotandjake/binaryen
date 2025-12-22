@@ -555,12 +555,12 @@ if(EMSCRIPTEN)
     target_link_libraries(binaryen_js PRIVATE "-sSINGLE_FILE")
   endif()
   if(JS_OF_OCAML)
+    # js_of_ocaml doesn't support emscript modules
+    target_link_libraries(binaryen_js PRIVATE "-sEXPORT_ES6=0")
     # js_of_ocaml needs a specified variable with special comment to provide the library to consumer
     target_link_libraries(binaryen_js PRIVATE "--extern-pre-js=${CMAKE_CURRENT_SOURCE_DIR}/src/js/binaryen.jsoo-extern-pre.js")
-    # Currently, js_of_ocaml can only process ES5 code
-    target_link_libraries(binaryen_js PRIVATE optimized "--closure-args=\"--language_out=ECMASCRIPT5\"")
   else()
-    target_link_libraries(binaryen_js PRIVATE "-sEXPORT_ES6")
+    target_link_libraries(binaryen_js PRIVATE "-sEXPORT_ES6=1")
   endif()
   target_link_libraries(binaryen_js PRIVATE "-sEXPORTED_RUNTIME_METHODS=stringToUTF8OnStack,stringToAscii")
   target_link_libraries(binaryen_js PRIVATE "-sEXPORTED_FUNCTIONS=_malloc,_free,__i32_load")
