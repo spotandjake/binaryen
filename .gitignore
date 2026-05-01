@@ -61,3 +61,8 @@ CMakeUserPresets.json
 
 # files related to clangd cache
 .cache/*
+
+
+# Esy
+_esy/
+node_modules/

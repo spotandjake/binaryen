@@ -1,0 +1,65 @@
+{
+  "checksum": "0cc0331721ac9391d03619b7cbefa1fc",
+  "root": "esy-binaryen@link-dev:./esy.json",
+  "node": {
+    "esy-binaryen@link-dev:./esy.json": {
+      "id": "esy-binaryen@link-dev:./esy.json",
+      "name": "esy-binaryen",
+      "version": "link-dev:./esy.json",
+      "source": { "type": "link-dev", "path": ".", "manifest": "esy.json" },
+      "overrides": [],
+      "dependencies": [
+        "@opam/conf-ninja@github:spotandjake/ninja:esy.json#25fe64432492abd515bd4a53f6c7b4fd1a5d9315@d41d8cd9",
+        "@opam/conf-cmake@github:grain-lang/cmake:esy.json#033cab656dc71a6488b3c1ca6ea45099f794bd03@d41d8cd9"
+      ],
+      "devDependencies": [],
+      "available": [
+        [ "darwin", "x86_64" ],
+        [ "darwin", "arm64" ],
+        [ "linux", "x86_64" ],
+        [ "windows", "x86_64" ]
+      ]
+    },
+    "@opam/conf-ninja@github:spotandjake/ninja:esy.json#25fe64432492abd515bd4a53f6c7b4fd1a5d9315@d41d8cd9": {
+      "id": "@opam/conf-ninja@github:spotandjake/ninja:esy.json#25fe64432492abd515bd4a53f6c7b4fd1a5d9315@d41d8cd9",
+      "name": "@opam/conf-ninja",
+      "version": "github:spotandjake/ninja:esy.json#25fe64432492abd515bd4a53f6c7b4fd1a5d9315",
+      "source": {
+        "type": "install",
+        "source": [
+          "github:spotandjake/ninja:esy.json#25fe64432492abd515bd4a53f6c7b4fd1a5d9315"
+        ]
+      },
+      "overrides": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "available": [
+        [ "darwin", "x86_64" ],
+        [ "darwin", "arm64" ],
+        [ "linux", "x86_64" ],
+        [ "windows", "x86_64" ]
+      ]
+    },
+    "@opam/conf-cmake@github:grain-lang/cmake:esy.json#033cab656dc71a6488b3c1ca6ea45099f794bd03@d41d8cd9": {
+      "id": "@opam/conf-cmake@github:grain-lang/cmake:esy.json#033cab656dc71a6488b3c1ca6ea45099f794bd03@d41d8cd9",
+      "name": "@opam/conf-cmake",
+      "version": "github:grain-lang/cmake:esy.json#033cab656dc71a6488b3c1ca6ea45099f794bd03",
+      "source": {
+        "type": "install",
+        "source": [
+          "github:grain-lang/cmake:esy.json#033cab656dc71a6488b3c1ca6ea45099f794bd03"
+        ]
+      },
+      "overrides": [],
+      "dependencies": [],
+      "devDependencies": [],
+      "available": [
+        [ "darwin", "x86_64" ],
+        [ "darwin", "arm64" ],
+        [ "linux", "x86_64" ],
+        [ "windows", "x86_64" ]
+      ]
+    }
+  },
+  "platformSpecific": {}
+}
